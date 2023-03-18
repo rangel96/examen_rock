@@ -1,6 +1,11 @@
 # ExamenRock
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.2.
+## Versions
+
+- [Angular CLI](https://github.com/angular/angular-cli) version 15.2.2.
+- [Node](https://nodejs.org) version 18.15.0.
+- [npm](https://www.npmjs.com) version 9.6.1.
+
 
 ## Development server
 
