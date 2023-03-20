@@ -2,20 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ContactanosComponent } from './contactanos/contactanos.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    ContactanosComponent
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    ContactanosComponent
   ],
   imports: [
     CommonModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

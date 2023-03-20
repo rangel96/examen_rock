@@ -1,0 +1,36 @@
+//@media (min-width: 768px) {
+//  .col-md-6 {
+//    transition: all 0.3s ease-in-out; // Agrega una transición suave al efecto hover
+//  }
+//
+//  .col-md-6:hover {
+//    filter: brightness(50%); // Cambia el brillo de la imagen al 50% al pasar el cursor sobre ella
+//  }
+//}
+
+.col-md-6 {
+  background-size: cover;
+  background-position: center;
+
+  // Deshabilita el hover por defecto
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.col-md-6.active {
+  // Aplica el efecto hover
+  filter: brightness(50%);
+}
+
+@media (max-width: 767px) {
+  // Activa el hover cuando se toque en la imagen en pantallas móviles
+  .col-md-6.active {
+    filter: brightness(50%);
+  }
+}
+
+.auto {
+  background-image: url('../../../assets/img/Mazda_Roadster_MX-5.jpg');
+  background-size: cover;
+  background-position: center;
+}

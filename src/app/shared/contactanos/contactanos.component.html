@@ -1,0 +1,92 @@
+<!-- Modal -->
+<div class="modal fade" id="contactanos" tabindex="-1" aria-labelledby="contactanosLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+
+            <!-- Text Area -->
+            <div class="col-12">
+              <p class="fs-2">
+                Llena el siguiente formulario y uno de nuestros asesores se pondrá en contacto contigo.
+              </p>
+            </div>
+
+            <!-- Forms -->
+            <form [formGroup]="contactForm">
+
+              <!-- Nombre -->
+              <div class="col-12">
+                <div class="mb-3">
+                  <label class="form-label">Nombre:</label>
+                  <input type="text" class="form-control" formControlName="nombre">
+                  <div *ngIf="fieldInvalid('nombre')" class="form-text text-danger">* Campo requerido</div>
+                </div>
+              </div>
+
+              <!-- Correo electrónico -->
+              <div class="col-12">
+                <div class="mb-3">
+                  <label class="form-label">Correo electrónico:</label>
+                  <input type="text" class="form-control" formControlName="email">
+                  <div *ngIf="fieldInvalid('email')" class="form-text text-danger">* Campo requerido</div>
+                </div>
+              </div>
+
+              <!-- Mensaje -->
+              <div class="col-12">
+                <div class="mb-3">
+                  <label class="form-label">Mensaje:</label>
+                  <input type="text" class="form-control" formControlName="mensaje">
+                  <div *ngIf="fieldInvalid('mensaje')" class="form-text text-danger">* Campo requerido</div>
+                </div>
+              </div>
+
+              <!-- Código postal -->
+              <div class="col-12">
+                <div class="mb-3">
+                  <label class="form-label">Código postal:</label>
+                  <input type="number" class="form-control" formControlName="cp">
+                  <div *ngIf="fieldInvalid('cp')" class="form-text text-danger">* Solo acepta números, debe contener 5 dígitos</div>
+                </div>
+              </div>
+
+              <!-- Estado -->
+              <div *ngIf="contactForm.valid" class="col-12">
+                <div class="mb-3">
+                  <label class="form-label">Estado:</label>
+                  <input type="text" class="form-control" [value]="contact.estado" disabled>
+                </div>
+              </div>
+
+              <!-- Municipio -->
+              <div *ngIf="contactForm.valid" class="col-12">
+                <div class="mb-3">
+                  <label class="form-label">Municipio:</label>
+                  <input type="text" class="form-control" [value]="contact.municipio" disabled>
+                </div>
+              </div>
+
+              <!-- Colonia -->
+              <div *ngIf="contactForm.valid" class="col-12">
+                <div class="mb-3">
+                  <label class="form-label">Colonia:</label>
+                  <input type="text" class="form-control" [value]="contact.colonia" disabled>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="sendRequest()"
+        >Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>

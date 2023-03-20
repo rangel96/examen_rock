@@ -3,20 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { InicioComponent } from './inicio/inicio.component';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
-import { ContactanosComponent } from './contactanos/contactanos.component';
-import { ScreensRoutingModule } from './screens-routing.module';
+import { ScreenRoutingModule } from './screen-routing.module';
 
 
 
 @NgModule({
   declarations: [
     InicioComponent,
-    QuienesSomosComponent,
-    ContactanosComponent
+    QuienesSomosComponent
   ],
   imports: [
     CommonModule,
-    ScreensRoutingModule
+    ScreenRoutingModule
   ]
 })
 export class ScreensModule { }

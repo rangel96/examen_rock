@@ -1,20 +1,26 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-xxl bg-body-tertiary fixed-top">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active-link active" routerLink="/inicio">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active-link active" routerLink="/quienes-somos">Quienes somos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active-link active" routerLink="/contactanos">Contáctanos</a>
-        </li>
-      </ul>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header" data-bs-dismiss="offcanvas">
+        <button type="button" class="btn-close" aria-label="Close"></button>
+        <h5>Cerrar</h5>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav pe-3">
+          <li class="nav-item" data-bs-dismiss="offcanvas">
+            <a class="nav-link" routerLinkActive="active-link active" routerLink="/inicio">Inicio</a>
+          </li>
+          <li class="nav-item" data-bs-dismiss="offcanvas">
+            <a class="nav-link" routerLinkActive="active-link active" routerLink="/quienes-somos">Quienes somos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pointer" data-bs-toggle="modal" data-bs-target="#contactanos">Contáctanos</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
