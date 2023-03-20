@@ -1,5 +1,7 @@
-import { Component, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observer, Subscription } from 'rxjs';
+import { ContactanosService } from './contactanos.service';
 
 @Component({
   selector: 'app-contactanos',
@@ -8,10 +10,35 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ContactanosComponent implements OnDestroy {
 
+  // Form
   contactForm!: FormGroup;
 
+  // List
+  directionList: any;
+
+  // Validators Variables
+  cpValueTemp: string = '';
+  cpIsInvalid: boolean = false;
+
+  // RxJS
+  directionsSub$: Subscription | undefined;
+  directionsObs$: Observer<any> = {
+    next: (data: any) => {
+      this.directionList = data;
+      this.cpValueTemp = this.contact.cp;
+      this.cpIsInvalid = false;
+      console.log(data);
+    },
+    error: (err: any) => {
+      this.cpIsInvalid = true;
+      console.warn(err);
+    },
+    complete: () => this.directionsSub$?.unsubscribe(),
+  };
+
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private contactanosSvc: ContactanosService
   ) {
     this.initForm();
   }
@@ -53,6 +80,22 @@ export class ContactanosComponent implements OnDestroy {
 
   reset(): void {
     this.contactForm.reset();
+  }
+
+  getDirection(): void {
+
+    // Validación
+    if (this.contactForm.controls['cp'].invalid) {
+      return;
+    }
+
+    // Validación para que no haga la misma consulta
+    if (this.cpValueTemp !== '' && this.cpValueTemp === this.contact.cp) {
+      return;
+    }
+
+    // RxJS
+    this.directionsSub$ = this.contactanosSvc.getDirections(this.contact.cp).subscribe(this.directionsObs$);
   }
 
 }

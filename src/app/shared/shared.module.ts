@@ -4,7 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ContactanosComponent } from './contactanos/contactanos.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
@@ -20,7 +20,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RouterLink,
     RouterLinkActive,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
+  ],
+  providers: [provideNgxMask()]
 })
-export class SharedModule { }
+export class SharedModule {
+}

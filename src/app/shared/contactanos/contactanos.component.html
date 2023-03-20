@@ -47,8 +47,15 @@
               <div class="col-12">
                 <div class="mb-3">
                   <label class="form-label">Código postal:</label>
-                  <input type="number" class="form-control" formControlName="cp">
+                  <input type="text"
+                         class="form-control"
+                         formControlName="cp"
+                         [dropSpecialCharacters]="false"
+                         mask="00000"
+                         (ngModelChange)="getDirection()"
+                  >
                   <div *ngIf="fieldInvalid('cp')" class="form-text text-danger">* Solo acepta números, debe contener 5 dígitos</div>
+                  <div *ngIf="cpIsInvalid" class="form-text text-danger">* Código postal inválido</div>
                 </div>
               </div>
 
