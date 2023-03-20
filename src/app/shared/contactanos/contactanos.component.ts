@@ -1,8 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observer, Subscription } from 'rxjs';
+
 import { ContactanosService } from './contactanos.service';
-import { DirectionModel } from './contactanos.model';
+import { UbicacionModel } from './contactanos.response.model';
 
 @Component({
   selector: 'app-contactanos',
@@ -15,22 +16,24 @@ export class ContactanosComponent implements OnDestroy {
   contactForm!: FormGroup;
 
   // List
-  directionList: DirectionModel[] | undefined;
+  directionList: UbicacionModel[] | undefined;
 
   // Validators Variables
   cpValueTemp: string = '';
   cpIsInvalid: boolean = false;
+  showDirectionList: boolean = false;
 
   // RxJS
   directionsSub$: Subscription | undefined;
   directionsObs$: Observer<any> = {
-    next: (data: DirectionModel[]) => {
+    next: (data: UbicacionModel[]) => {
       this.directionList = data;
       this.cpValueTemp = this.contact.cp;
       this.cpIsInvalid = false;
-      console.log(data);
+      this.showDirectionList = true;
     },
     error: (err: any) => {
+      this.showDirectionList = false;
       this.cpIsInvalid = true;
       console.warn(err);
     },
@@ -64,6 +67,16 @@ export class ContactanosComponent implements OnDestroy {
     });
   }
 
+  setUbicacion(_ubicacion: UbicacionModel, idx: number): void {
+    // Get values
+    const {estado, municipio, colonias } = _ubicacion;
+
+    // Set Values Controls
+    this.contactForm.controls['estado'].setValue(estado);
+    this.contactForm.controls['municipio'].setValue(municipio);
+    this.contactForm.controls['colonia'].setValue(colonias[idx]);
+  }
+
   sendRequest() {
     if (this.contactForm.invalid) {
       this.contactForm.markAllAsTouched();
@@ -72,6 +85,7 @@ export class ContactanosComponent implements OnDestroy {
 
     // TODO: Action
     console.log('Posting contact');
+    console.log(this.contact);
   }
 
   fieldInvalid(fieldName: string): boolean | undefined {
@@ -80,6 +94,11 @@ export class ContactanosComponent implements OnDestroy {
   }
 
   reset(): void {
+    console.log('Entró');
+    this.cpValueTemp = '';
+    this.cpIsInvalid = false;
+    this.showDirectionList = false;
+    this.directionList = [];
     this.contactForm.reset();
   }
 
@@ -87,11 +106,13 @@ export class ContactanosComponent implements OnDestroy {
 
     // Validación
     if (this.contactForm.controls['cp'].invalid) {
+      this.showDirectionList = false;
       return;
     }
 
     // Validación para que no haga la misma consulta
     if (this.cpValueTemp !== '' && this.cpValueTemp === this.contact.cp) {
+      this.showDirectionList = true;
       return;
     }
 

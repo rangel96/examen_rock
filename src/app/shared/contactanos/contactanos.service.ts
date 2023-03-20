@@ -1,23 +1,28 @@
 import { Injectable } from '@angular/core';
 import { BackendService } from '../../utils/backend.service';
 import { map, Observable } from 'rxjs';
-import { DirectionModel } from './contactanos.model';
+import { CatalogoModel } from './contactanos.result.model';
+import { UbicacionModel } from './contactanos.response.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactanosService {
 
-  constructor(
-    private backend: BackendService
-  ) {
-  }
+  constructor(private backend: BackendService) {}
 
-  getDirections(cp: string): Observable<DirectionModel[]> {
+  getDirections(cp: string): Observable<UbicacionModel[]> {
     const path = `${ this.backend.getEndpoint('get-direction') }/${ cp }`;
     return this.backend
       .Get('core', path)
-      .pipe(map(value => JSON.parse(value.CatalogoJsonString)));
+      .pipe(map(({ CatalogoJsonString }) => {
+        const CatalogoStringJson: CatalogoModel[] = JSON.parse(CatalogoJsonString);
+        return CatalogoStringJson.map(({ Municipio, Ubicacion }) => ({
+          estado: Municipio.Estado.sEstado,
+          municipio: Municipio.sMunicipio,
+          colonias: Ubicacion.map(({ sUbicacion }) => sUbicacion),
+        }));
+      }));
   }
 
 }

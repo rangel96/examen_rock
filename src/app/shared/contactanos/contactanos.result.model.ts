@@ -1,30 +1,30 @@
-export interface DirectionModel {
-  municipio: Municipio;
-  ubicacion: Ubicacion[];
+export interface CatalogoModel {
+  Municipio: Municipio;
+  Ubicacion: Ubicacion[];
 }
 
-export interface Municipio {
+interface Municipio {
   iIDMunicipio:           number;
-  estado:                 Estado;
+  Estado:                 Estado;
   iMunicipioEstado:       number;
   iClaveMunicipioCepomex: number;
   sMunicipio:             string;
 }
 
-export interface Estado {
+interface Estado {
   iIDEstado:           number;
-  pais:                null;
+  Pais:                null;
   iEstadoPais:         number;
   iClaveEstadoCepomex: number;
   sEstado:             string;
 }
 
-export interface Ubicacion {
+interface Ubicacion {
   iIDUbicacion:           number;
-  codigoPostal:           null;
+  CodigoPostal:           null;
   iUbicacionCodigoPostal: number;
-  tipoUbicacion:          null;
+  TipoUbicacion:          null;
   iClaveUbicacionCepomex: number;
-  ciudad:                 null;
+  Ciudad:                 null;
   sUbicacion:             string;
 }

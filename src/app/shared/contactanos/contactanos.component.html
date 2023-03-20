@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="contactanos" tabindex="-1" aria-labelledby="contactanosLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-body">
         <div class="container-fluid">
@@ -54,8 +54,32 @@
                          mask="00000"
                          (ngModelChange)="getDirection()"
                   >
-                  <div *ngIf="fieldInvalid('cp')" class="form-text text-danger">* Solo acepta números, debe contener 5 dígitos</div>
+                  <div *ngIf="fieldInvalid('cp')" class="form-text text-danger">* Solo acepta números, debe contener 5
+                    dígitos
+                  </div>
                   <div *ngIf="cpIsInvalid" class="form-text text-danger">* Código postal inválido</div>
+                </div>
+              </div>
+
+              <!-- Select Estado -->
+              <div class="col-12 mb-3" *ngIf="showDirectionList">
+                <p>Selecciona el estado:</p>
+                <div class="card">
+                  <div *ngFor="let direction of directionList">
+                    <div class="card-header"
+                         [ngClass]="{ 'select-colonia': direction.municipio === contact.municipio }">
+                      {{ direction.municipio }}
+                    </div>
+                    <ul class="list-group list-group-flush pointer">
+                      <li *ngFor="let colonia of direction.colonias; let idx = index"
+                          class="list-group-item"
+                          (click)="setUbicacion(direction, idx)"
+                          [ngClass]="{ 'select-colonia': colonia === contact.colonia }"
+                      >
+                        {{ colonia }}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
@@ -92,7 +116,8 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Cancelar</button>
         <button type="button" class="btn btn-primary" (click)="sendRequest()"
-        >Enviar</button>
+        >Enviar
+        </button>
       </div>
     </div>
   </div>
