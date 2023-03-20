@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observer, Subscription } from 'rxjs';
 import { ContactanosService } from './contactanos.service';
+import { DirectionModel } from './contactanos.model';
 
 @Component({
   selector: 'app-contactanos',
@@ -14,7 +15,7 @@ export class ContactanosComponent implements OnDestroy {
   contactForm!: FormGroup;
 
   // List
-  directionList: any;
+  directionList: DirectionModel[] | undefined;
 
   // Validators Variables
   cpValueTemp: string = '';
@@ -23,7 +24,7 @@ export class ContactanosComponent implements OnDestroy {
   // RxJS
   directionsSub$: Subscription | undefined;
   directionsObs$: Observer<any> = {
-    next: (data: any) => {
+    next: (data: DirectionModel[]) => {
       this.directionList = data;
       this.cpValueTemp = this.contact.cp;
       this.cpIsInvalid = false;
