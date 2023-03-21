@@ -1,4 +1,5 @@
 <!-- Modal -->
+
 <div class="modal fade" id="contactanos" tabindex="-1" aria-labelledby="contactanosLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -63,7 +64,7 @@
 
               <!-- Select Estado -->
               <div class="col-12 mb-3" *ngIf="showDirectionList">
-                <p>Selecciona el estado:</p>
+                <p>Selecciona la colonia:</p>
                 <div class="card">
                   <div *ngFor="let direction of directionList">
                     <div class="card-header"
@@ -111,12 +112,32 @@
 
           </div>
         </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Cancelar</button>
         <button type="button" class="btn btn-primary" (click)="sendRequest()"
         >Enviar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="done" tabindex="-1" aria-labelledby="doneLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col text-center">
+              <h1>Mensaje enviado</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Confirmar
         </button>
       </div>
     </div>

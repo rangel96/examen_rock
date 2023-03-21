@@ -1,16 +1,17 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observer, Subscription } from 'rxjs';
 
 import { ContactanosService } from './contactanos.service';
 import { UbicacionModel } from './contactanos.response.model';
+import { UtilsService } from '../../utils/utils.service';
 
 @Component({
   selector: 'app-contactanos',
   templateUrl: './contactanos.component.html',
   styleUrls: ['./contactanos.component.scss']
 })
-export class ContactanosComponent implements OnDestroy {
+export class ContactanosComponent {
 
   // Form
   contactForm!: FormGroup;
@@ -19,13 +20,13 @@ export class ContactanosComponent implements OnDestroy {
   directionList: UbicacionModel[] | undefined;
 
   // Validators Variables
-  cpValueTemp: string = '';
+  private cpValueTemp: string = '';
   cpIsInvalid: boolean = false;
   showDirectionList: boolean = false;
 
   // RxJS
-  directionsSub$: Subscription | undefined;
-  directionsObs$: Observer<any> = {
+  protected directionsSub$: Subscription | undefined;
+  protected directionsObs$: Observer<any> = {
     next: (data: UbicacionModel[]) => {
       this.directionList = data;
       this.cpValueTemp = this.contact.cp;
@@ -42,20 +43,24 @@ export class ContactanosComponent implements OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private contactanosSvc: ContactanosService
+    private contactanosSvc: ContactanosService,
+    private utils: UtilsService
   ) {
     this.initForm();
   }
 
-  ngOnDestroy(): void {
-    console.log('Hola');
-  }
 
-  get contact() {
+  get contact(): any {
     return this.contactForm.value;
   }
 
-  initForm(): void {
+  fieldInvalid(fieldName: string): boolean | undefined {
+    const control = this.contactForm.get(fieldName);
+    return control?.invalid && control?.touched;
+  }
+
+
+  protected initForm(): void {
     this.contactForm = this.fb.group({
       nombre: [null, Validators.required],
       email: [null, Validators.required],
@@ -67,40 +72,6 @@ export class ContactanosComponent implements OnDestroy {
     });
   }
 
-  setUbicacion(_ubicacion: UbicacionModel, idx: number): void {
-    // Get values
-    const {estado, municipio, colonias } = _ubicacion;
-
-    // Set Values Controls
-    this.contactForm.controls['estado'].setValue(estado);
-    this.contactForm.controls['municipio'].setValue(municipio);
-    this.contactForm.controls['colonia'].setValue(colonias[idx]);
-  }
-
-  sendRequest() {
-    if (this.contactForm.invalid) {
-      this.contactForm.markAllAsTouched();
-      return;
-    }
-
-    // TODO: Action
-    console.log('Posting contact');
-    console.log(this.contact);
-  }
-
-  fieldInvalid(fieldName: string): boolean | undefined {
-    const control = this.contactForm.get(fieldName);
-    return control?.invalid && control?.touched;
-  }
-
-  reset(): void {
-    console.log('Entró');
-    this.cpValueTemp = '';
-    this.cpIsInvalid = false;
-    this.showDirectionList = false;
-    this.directionList = [];
-    this.contactForm.reset();
-  }
 
   getDirection(): void {
 
@@ -118,6 +89,41 @@ export class ContactanosComponent implements OnDestroy {
 
     // RxJS
     this.directionsSub$ = this.contactanosSvc.getDirections(this.contact.cp).subscribe(this.directionsObs$);
+  }
+
+  setUbicacion(_ubicacion: UbicacionModel, idx: number): void {
+    // Get values
+    const {estado, municipio, colonias } = _ubicacion;
+
+    // Set Values Controls
+    this.contactForm.controls['estado'].setValue(estado);
+    this.contactForm.controls['municipio'].setValue(municipio);
+    this.contactForm.controls['colonia'].setValue(colonias[idx]);
+  }
+
+  sendRequest(): void {
+    if (this.contactForm.invalid) {
+      this.contactForm.markAllAsTouched();
+      return;
+    }
+
+    // TODO: Action
+    console.log('Posting contact');
+    console.log(this.contact);
+    this.utils.openModal('done');
+  }
+
+  reset(): void {
+    // Form
+    this.contactForm.reset();
+
+    // Validators variables
+    this.cpValueTemp = '';
+    this.cpIsInvalid = false;
+    this.showDirectionList = false;
+
+    // Array
+    this.directionList = [];
   }
 
 }
