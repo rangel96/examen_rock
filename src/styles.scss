@@ -2,3 +2,44 @@
 .pointer {
   cursor: pointer;
 }
+
+// Background color
+$color-gris-oscuro: #404040;
+
+
+// Colors
+$color-azul-oscuro: #1A237E;
+$color-box-shadow: 0 0 0 0.2rem rgba(26, 35, 126, 0.50);
+$color-marron: #4E342E;
+
+
+.navbar, .offcanvas, .bg-body-custom {
+  background-color: $color-azul-oscuro !important;
+}
+
+.color-white {
+  color: white !important;
+}
+
+.bg-azul-oscuro {
+  background-color: $color-azul-oscuro !important
+}
+
+.btn-important {
+  background-color: $color-marron;
+}
+
+
+// Form Control
+.form-control {
+  border: 3px solid $color-azul-oscuro !important;
+  &:focus {
+    border-color: $color-azul-oscuro !important;
+    box-shadow: $color-box-shadow !important;
+  }
+}
+
+// Text Color`
+h1, h2, h3, h4, h5, h6, .fs-2, .form-label {
+  color: #979797 !important;
+}

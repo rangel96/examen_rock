@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observer, Subscription } from 'rxjs';
 
-import { ContactanosService } from './contactanos.service';
-import { UbicacionModel } from './contactanos.response.model';
-import { UtilsService } from '../../utils/utils.service';
+import { ContactanosService } from '../services/contactanos.service';
+import { UbicacionModel } from '../models/contactanos.response.model';
+import { UtilsService } from '../../../utils/utils.service';
 
 @Component({
   selector: 'app-contactanos',

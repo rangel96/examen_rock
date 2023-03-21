@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BackendService } from '../../utils/backend.service';
+import { BackendService } from '../../../utils/backend.service';
 import { map, Observable } from 'rxjs';
-import { CatalogoModel } from './contactanos.result.model';
-import { UbicacionModel } from './contactanos.response.model';
+import { CatalogoModel } from '../models/contactanos.result.model';
+import { UbicacionModel } from '../models/contactanos.response.model';
 
 @Injectable({
   providedIn: 'root'
