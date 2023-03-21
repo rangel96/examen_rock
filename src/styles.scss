@@ -3,6 +3,11 @@
   cursor: pointer;
 }
 
+// Text Color`
+h2, h3, h4, h5, h6, .fs-2, .form-label, .color-grey {
+  color: #979797 !important;
+}
+
 // Background color
 $color-gris-oscuro: #404040;
 
@@ -17,7 +22,7 @@ $color-marron: #4E342E;
   background-color: $color-azul-oscuro !important;
 }
 
-.color-white {
+.color-white, h1.color-white {
   color: white !important;
 }
 
@@ -39,7 +44,11 @@ $color-marron: #4E342E;
   }
 }
 
-// Text Color`
-h1, h2, h3, h4, h5, h6, .fs-2, .form-label {
-  color: #979797 !important;
-}
+
+$utilities: (
+  "overflow": (
+    responsive: true,
+    property: overflow,
+    values: visible hidden scroll auto,
+  ),
+);

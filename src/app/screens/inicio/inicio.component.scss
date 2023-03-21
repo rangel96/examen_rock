@@ -1,36 +1,48 @@
-//@media (min-width: 768px) {
-//  .col-md-6 {
-//    transition: all 0.3s ease-in-out; // Agrega una transición suave al efecto hover
-//  }
-//
-//  .col-md-6:hover {
-//    filter: brightness(50%); // Cambia el brillo de la imagen al 50% al pasar el cursor sobre ella
-//  }
-//}
-
-.col-md-6 {
-  background-size: cover;
-  background-position: center;
-
-  // Deshabilita el hover por defecto
-  pointer-events: none;
-  transition: all 0.3s ease-in-out;
+// Background Image
+.img-auto {
+  background-image: url('../../../assets/img/auto.jpg');
+}
+.img-gastos-medicos {
+  background-image: url('../../../assets/img/gastos_medicos.jpg');
+}
+.img-hogar {
+  background-image: url('../../../assets/img/hogar.jpg');
+}
+.img-vida {
+  background-image: url('../../../assets/img/vida.jpg');
 }
 
-.col-md-6.active {
-  // Aplica el efecto hover
-  filter: brightness(50%);
-}
 
-@media (max-width: 767px) {
-  // Activa el hover cuando se toque en la imagen en pantallas móviles
-  .col-md-6.active {
-    filter: brightness(50%);
+// Media queries
+@media (max-width: 768px) {
+  .image-container {
+    min-height: 47vh !important;
   }
 }
 
-.auto {
-  background-image: url('../../../assets/img/Mazda_Roadster_MX-5.jpg');
+
+// Containers
+.image-container {
+  position: relative;
   background-size: cover;
   background-position: center;
+  text-align: center;
+  max-height: 46.5vh;
+}
+
+//Hover styles
+.active {
+  filter: brightness(50%);
+}
+
+.mega-text {
+  font-size: 3.5em;
+  font-weight: bold;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
